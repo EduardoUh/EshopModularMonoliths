@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34616.47
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bootstrapper", "Bootstrapper", "{618670D8-646E-4D16-94CD-DF9A02D596D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FA04E6DE-BB66-4828-9381-91D016B58316}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{FA0A711D-D050-4E18-9508-E4D382E1F866}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EshopWebApi", "Bootstrapper\EshopWebApi\EshopWebApi.csproj", "{FBC426B0-6C48-47F5-B5F9-F14C61908499}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBC426B0-6C48-47F5-B5F9-F14C61908499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC426B0-6C48-47F5-B5F9-F14C61908499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC426B0-6C48-47F5-B5F9-F14C61908499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC426B0-6C48-47F5-B5F9-F14C61908499}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FBC426B0-6C48-47F5-B5F9-F14C61908499} = {618670D8-646E-4D16-94CD-DF9A02D596D4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09399327-9C3D-4CE7-8485-9673A0DF6B1F}
+	EndGlobalSection
+EndGlobal
