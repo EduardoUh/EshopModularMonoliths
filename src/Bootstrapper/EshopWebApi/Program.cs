@@ -15,4 +15,9 @@ var app = builder.Build();
 // we add middleware components in order to handle
 // requests and responses).
 
+app
+    .UseBasketModuleConfigurations()
+    .UseCatalogModuleConfigurations()
+    .UseOrderingModuleConfigurations();
+
 app.Run();
