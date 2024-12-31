@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+    eshopdb:
+        container_name: eshopdb
+        restart: always
+        ports:
+            - 5432:5432
+        volumes:
+            - postgres_eshopdb:/var/lib/postgresql/data/
+        environment:
+            - POSTGRES_USER=test_user
+            - POSTGRES_PASSWORD=admin@strongPassword
+            - POSTGRES_DB=EShopDb
+    pgAdmin:
+        container_name: pgadmin
+        depends_on: [eshopdb]
+        restart: always
+        ports:
+            - 8080:80
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=eduardo@gmail.com
+            - PGADMIN_DEFAULT_PASSWORD=my_secure_password
