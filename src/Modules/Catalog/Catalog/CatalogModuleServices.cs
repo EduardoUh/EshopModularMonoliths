@@ -10,6 +10,16 @@
             //      .AddInfrastructureServices(configuration)
             //      .AddApiServices(configuration)
 
+            // Api endpoint services
+
+            // Application use case services
+
+            // data - infrastructure services
+            var connectionString = configuration.GetConnectionString("Database");
+
+            services.AddDbContext<CatalogDbContext>(options =>
+                options.UseNpgsql(connectionString ?? throw new Exception("Database connection string not found")));
+
             return services;
         }
     }
