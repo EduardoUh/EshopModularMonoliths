@@ -18,6 +18,8 @@ services:
         restart: always
         ports:
             - 8080:80
+        volumes:
+            - pgadmin_eshop:/var/lib/pgadmin
         environment:
             - PGADMIN_DEFAULT_EMAIL=eduardo@gmail.com
             - PGADMIN_DEFAULT_PASSWORD=my_secure_password
