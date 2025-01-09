@@ -10,6 +10,14 @@
             //      .UseInfrastructureServices()
             //      .UseApiServices();
 
+            // 1.- Use Api Endpoint Services
+
+            // 2.- Use Application Use Case Services
+
+            // 3.- Use Data - Infrastructure Services
+
+            applicationBuilder.UseMigration<CatalogDbContext>();
+
             return applicationBuilder;
         }
     }
