@@ -18,7 +18,10 @@
             var connectionString = configuration.GetConnectionString("Database");
 
             services.AddDbContext<CatalogDbContext>(options =>
-                options.UseNpgsql(connectionString ?? throw new Exception("Database connection string not found")));
+            {
+                options.AddInterceptors(new AuditableEntityInterceptor());
+                options.UseNpgsql(connectionString ?? throw new Exception("Database connection string not found"));
+            });
 
             services.AddScoped<IDataSeeder, CatalogDataSeeder>();
 

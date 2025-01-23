@@ -31,5 +31,11 @@
                 await seeder.SeedAllAsync();
             }
         }
+
+        public static bool HasChangedOwnedEntities(this EntityEntry entry) =>
+            entry.References.Any(reference =>
+                reference.TargetEntry != null &&
+                reference.TargetEntry.Metadata.IsOwned() &&
+                (reference.TargetEntry.State == EntityState.Added || reference.TargetEntry.State == EntityState.Modified));
     }
 }
