@@ -13,13 +13,24 @@
             // Api endpoint services
 
             // Application use case services
+            services.AddMediatR(config =>
+            {
+                config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            });
 
             // data - infrastructure services
             var connectionString = configuration.GetConnectionString("Database");
 
-            services.AddDbContext<CatalogDbContext>(options =>
+            services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
+
+            services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
+
+            services.AddDbContext<CatalogDbContext>((serviceProvider, options) =>
             {
-                options.AddInterceptors(new AuditableEntityInterceptor());
+                var interceptors = serviceProvider.GetServices<ISaveChangesInterceptor>();
+
+                options.AddInterceptors(interceptors);
+
                 options.UseNpgsql(connectionString ?? throw new Exception("Database connection string not found"));
             });
 
