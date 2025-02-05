@@ -1,5 +1,6 @@
 ﻿global using Catalog.Data;
 global using Catalog.Data.Seed;
+global using Catalog.Products.DTOs;
 global using Catalog.Products.Events;
 global using Catalog.Products.Models;
 global using Microsoft.AspNetCore.Builder;
