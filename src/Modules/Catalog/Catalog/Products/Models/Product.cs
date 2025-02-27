@@ -40,11 +40,15 @@
             Category = category;
             Description = description;
             ImageFile = imageFile;
-            Price = price;
 
             // If price has changed, raise ProductPriceChanged domain event
             if (Price != price)
+            {
+                Price = price;
+
                 AddDomainEvent(new ProductPriceChangedEvent(this));
+            }
+
         }
     }
 }
