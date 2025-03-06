@@ -18,6 +18,8 @@
                 config.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
             });
 
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
             // data - infrastructure services
             var connectionString = configuration.GetConnectionString("Database");
 
