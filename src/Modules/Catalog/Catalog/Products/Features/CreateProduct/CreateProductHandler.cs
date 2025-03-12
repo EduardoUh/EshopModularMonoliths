@@ -24,26 +24,15 @@
 
     public class CreateProductHandler(
         CatalogDbContext catalogDbContext,
-        IValidator<CreateProductCommand> validator,
         ILogger<CreateProductHandler> logger
         )
         : ICommandHandler<CreateProductCommand, CreateProductResult>
     {
         private readonly CatalogDbContext _catalogDbContext = catalogDbContext;
-        private readonly IValidator<CreateProductCommand> _validator = validator;
         private readonly ILogger<CreateProductHandler> _logger = logger;
 
         public async Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            var result = await _validator.ValidateAsync(request, cancellationToken);
-
-            var errors = result.Errors.Select(error => error.ErrorMessage).ToList();
-
-            if (errors.Any())
-            {
-                throw new ValidationException(errors.FirstOrDefault());
-            }
-
             _logger.LogInformation("{@name}.Handle called with {@request}", nameof(CreateProductHandler), request);
 
             var product = CreateNewProduct(request.Product);

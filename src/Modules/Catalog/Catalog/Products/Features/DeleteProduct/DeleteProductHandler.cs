@@ -4,6 +4,15 @@
 
     public record DeleteProductResult(bool IsSuccess);
 
+    public class DeleteProductCommandValidator : AbstractValidator<DeleteProductCommand>
+    {
+        public DeleteProductCommandValidator()
+        {
+            RuleFor(x => x.Id)
+                .NotEmpty().WithMessage("{PropertyName} is required");
+        }
+    }
+
     public class DeleteProductHandler(CatalogDbContext catalogDbContext) : ICommandHandler<DeleteProductCommand, DeleteProductResult>
     {
         private readonly CatalogDbContext _catalogDbContext = catalogDbContext;

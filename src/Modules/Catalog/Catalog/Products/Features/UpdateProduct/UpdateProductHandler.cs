@@ -4,6 +4,21 @@
 
     public record UpdateProductResult(bool IsSuccess);
 
+    public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
+    {
+        public UpdateProductCommandValidator()
+        {
+            RuleFor(x => x.Product.Id)
+                .NotEmpty().WithMessage("{PropertyName} is required");
+
+            RuleFor(x => x.Product.Name)
+                .NotEmpty().WithMessage("{PropertyName} is required");
+
+            RuleFor(x => x.Product.Price)
+                .GreaterThan(0).WithMessage("{PropertyName} must be greater than 0");
+        }
+    }
+
     public class UpdateProductHandler(CatalogDbContext catalogDbContext)
         : ICommandHandler<UpdateProductCommand, UpdateProductResult>
     {
