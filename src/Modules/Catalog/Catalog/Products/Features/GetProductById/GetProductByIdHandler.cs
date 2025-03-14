@@ -14,11 +14,10 @@
         {
             var product = await _catalogDbContext.Products
                                 .AsNoTracking()
-                                .FirstOrDefaultAsync(product => product.Id.Equals(request.Id), cancellationToken);
+                                .FirstOrDefaultAsync(product => product.Id.Equals(request.Id), cancellationToken)
+                                ?? throw new ProductNotFoundException(request.Id);
 
-            return product is null
-                ? throw new Exception($"Product with the key [{request.Id}] not found")
-                : new GetProductByIdResult(product.Adapt<ProductDTO>());
+            return new GetProductByIdResult(product.Adapt<ProductDTO>());
         }
     }
 }

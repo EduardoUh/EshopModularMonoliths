@@ -11,6 +11,9 @@ builder.Services
     .AddCatalogModuleServices(builder.Configuration)
     .AddOrderingModuleSevices(builder.Configuration);
 
+// Injection the custom exception handler class
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline (this is where
@@ -24,31 +27,8 @@ app
     .UseCatalogModuleConfigurations()
     .UseOrderingModuleConfigurations();
 
-app.UseExceptionHandler(exceptionHandler =>
-{
-    exceptionHandler.Run(async context =>
-    {
-        var exception = context.Features.Get<IExceptionHandlerFeature>()?.Error;
-
-        if (exception is null) return;
-
-        var problemDetails = new ProblemDetails
-        {
-            Title = exception.Message,
-            Status = StatusCodes.Status500InternalServerError,
-            Detail = exception.StackTrace
-        };
-
-        var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
-
-        logger.LogError(exception, exception.Message);
-
-        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-
-        context.Response.ContentType = "application/problem+json";
-
-        await context.Response.WriteAsJsonAsync(problemDetails);
-    });
-});
+// Making the app use an exception handler, by letting it empty it will use
+// our custom exception handler
+app.UseExceptionHandler(options => { });
 
 app.Run();

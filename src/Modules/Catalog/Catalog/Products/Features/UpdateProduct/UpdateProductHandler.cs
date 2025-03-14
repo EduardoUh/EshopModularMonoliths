@@ -26,9 +26,8 @@
 
         public async Task<UpdateProductResult> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            var product = await _catalogDbContext.Products.FindAsync([request.Product.Id], cancellationToken);
-
-            if (product == null) throw new Exception($"Product with the key [{request.Product.Id}] not found");
+            var product = await _catalogDbContext.Products.FindAsync([request.Product.Id], cancellationToken)
+                ?? throw new ProductNotFoundException(request.Product.Id);
 
             UpdateProductWithNewValues(product, request.Product);
 

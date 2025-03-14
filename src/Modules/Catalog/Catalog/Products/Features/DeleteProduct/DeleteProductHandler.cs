@@ -19,9 +19,8 @@
 
         public async Task<DeleteProductResult> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
-            var product = await _catalogDbContext.Products.FindAsync([request.Id], cancellationToken);
-
-            if (product is null) throw new Exception($"Product with the key [{request.Id}] not found");
+            var product = await _catalogDbContext.Products.FindAsync([request.Id], cancellationToken)
+                ?? throw new ProductNotFoundException(request.Id);
 
             _catalogDbContext.Products.Remove(product);
 
